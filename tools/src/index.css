@@ -1,0 +1,21 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+	--primary: #6720ff;
+	--secondary: #c2a6ff;
+	--border: #d9c7ff;
+
+	--light: #f0e8ff;
+	--dark: #0f0526;
+
+	--font-family: 'Poppins', sans-serif;
+}
+
+*,
+*::before,
+*::after {
+	box-sizing: border-box;
+	@apply m-0 p-0;
+}
