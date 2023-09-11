@@ -13,7 +13,7 @@
 				<details class="w-full">
 					<summary>List of tools</summary>
 					<ul class="p-2 bg-base-100">
-						<li><a href="/tools/hex">Hex</a></li>
+						<li><a href="/tools/numbers">Numbers</a></li>
 						<li><a href="/tools/str">Str</a></li>
 						<li><a href="/tools/test">Test</a></li>
 					</ul>
