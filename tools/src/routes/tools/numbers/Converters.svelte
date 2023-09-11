@@ -4,6 +4,7 @@
 	let number = '';
 	let newMode = 'dec';
 	const bases = {
+		b36: 36,
 		hex: 16,
 		dec: 10,
 		oct: 8,
@@ -18,7 +19,7 @@
 	}
 </script>
 
-<form class="py-4">
+<form class="pt-4">
 	<div class="join mb-3 w-full">
 		<input
 			type="text"
@@ -43,10 +44,9 @@
 		<ul
 			class="menu menu-vertical sm:menu-horizontal bg-base-200 font-semibold text-neutral-content rounded-box"
 		>
-			<li><button on:click={() => swapMode('hex')}>Hex</button></li>
-			<li><button on:click={() => swapMode('dec')}>Dec</button></li>
-			<li><button on:click={() => swapMode('oct')}>Oct</button></li>
-			<li><button on:click={() => swapMode('bin')}>Bin</button></li>
+			{#each Object.keys(bases) as key}
+				<li><button on:click={() => swapMode(key)}>{key.toUpperCase()}</button></li>
+			{/each}
 		</ul>
 	</div>
 </form>
