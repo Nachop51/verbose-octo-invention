@@ -4,7 +4,7 @@
 
 <main class="mx-auto card w-96 bg-primary text-primary-content">
 	<div class="card-body">
-		<h1 class="card-title">Numbers page</h1>
+		<h1 class="card-title">Number converter page</h1>
 		<Converters />
 	</div>
 </main>
