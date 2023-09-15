@@ -1,8 +1,9 @@
 import { initializeApp } from "firebase/app"
-import { getFirestore } from "firebase/firestore"
+import { getFirestore, onSnapshot } from "firebase/firestore"
 import { getAuth, onAuthStateChanged } from "firebase/auth"
 import { getStorage } from "firebase/storage"
-import { writable } from "svelte/store"
+import { derived, writable, type Readable } from "svelte/store"
+import { doc } from "firebase/firestore"
 
 const firebaseConfig = {
   apiKey: "null",
@@ -41,3 +42,38 @@ function userStore() {
 }
 
 export const user = userStore()
+
+export function docStore<T>(path: string) {
+  const docRef = doc(db, path)
+
+  let unsubscribe: () => void
+
+  const { subscribe } = writable<T | null>(null, (set) => {
+    unsubscribe = onSnapshot(docRef, (snapshot) => {
+      set((snapshot.data() as T) ?? null)
+    })
+
+    return () => unsubscribe()
+  })
+
+  return {
+    subscribe,
+    ref: docRef,
+    id: docRef.id
+  }
+}
+
+interface UserData {
+  username: string;
+  bio: string;
+  photoURL: string;
+  links: string[];
+}
+
+export const userData = derived(user, ($user, set) => {
+  if ($user) {
+    return docStore<UserData>(`users/${$user.uid}`).subscribe(set)
+  } else {
+    set(null)
+  }
+})
