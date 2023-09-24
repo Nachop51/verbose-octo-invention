@@ -1,18 +1,18 @@
-import { initializeApp } from "firebase/app"
-import { getFirestore, onSnapshot } from "firebase/firestore"
-import { getAuth, onAuthStateChanged } from "firebase/auth"
-import { getStorage } from "firebase/storage"
-import { derived, writable, type Readable } from "svelte/store"
-import { doc } from "firebase/firestore"
+import { initializeApp } from 'firebase/app'
+import { getFirestore, onSnapshot } from 'firebase/firestore'
+import { getAuth, onAuthStateChanged } from 'firebase/auth'
+import { getStorage } from 'firebase/storage'
+import { derived, writable } from 'svelte/store'
+import { doc } from 'firebase/firestore'
 
 const firebaseConfig = {
-  apiKey: "null",
-  authDomain: "null",
-  projectId: "null",
-  storageBucket: "null.appspot.com",
-  messagingSenderId: "null",
-  appId: "1:null:web:null",
-  measurementId: "null"
+  apiKey: 'null',
+  authDomain: 'null',
+  projectId: 'null',
+  storageBucket: 'null',
+  messagingSenderId: 'null',
+  appId: 'null',
+  measurementId: 'null',
 }
 
 // Initialize Firebase
@@ -25,7 +25,7 @@ function userStore() {
   let unsubscribe: () => void
 
   if (!auth || !globalThis.window) {
-    console.warn("Auth is not initialized or not in browser")
+    console.warn('Auth is not initialized or not in browser')
     const { subscribe } = writable(null)
     return { subscribe }
   }
@@ -59,15 +59,15 @@ export function docStore<T>(path: string) {
   return {
     subscribe,
     ref: docRef,
-    id: docRef.id
+    id: docRef.id,
   }
 }
 
 interface UserData {
-  username: string;
-  bio: string;
-  photoURL: string;
-  links: string[];
+  username: string
+  bio: string
+  photoURL: string
+  links: string[]
 }
 
 export const userData = derived(user, ($user, set) => {
